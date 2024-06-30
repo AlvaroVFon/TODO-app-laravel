@@ -8,6 +8,7 @@
   <title>TODO app</title>
 </head>
   <body class="min-h-[100dvh] flex flex-col items-center justify-center gap-5">
+    <h1 class="text-4xl p-3 font-semibold bg-gray-100 w-1/3 text-center rounded border">TODO APP 📝</h1>
     <main class="w-full flex justify-center">
       <form action="/task" method="POST" class="flex flex-col gap-2 items-start border rounded w-1/3">
         @csrf 

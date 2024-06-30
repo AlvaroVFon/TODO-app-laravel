@@ -9,7 +9,7 @@ Route::group(
         Route::post('/task', [TaskController::class, 'addTask']);
         Route::delete('/task/{id}', [TaskController::class, 'deleteTask']);
         Route::get('/edit/{id}', [TaskController::class, 'editTask']);
-        Route::put('/update', [TaskController::class, 'updateTask']);
+        Route::put('/update/{id}', [TaskController::class, 'updateTask'])->name('update');
     }
 );
 
