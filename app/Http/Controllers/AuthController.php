@@ -29,18 +29,23 @@ class AuthController extends Controller
       $user->email = $request->email;
       $user->password = bcrypt($request->password);
       $user->save();
-      return redirect('/');
+      return redirect('/')->with('success', 'You are registered successfully.');
     } catch (\Exception $e) {
       return redirect('/')->with('error', 'This email is already registered.');
     }
   }
   public function login(Request $request)
   {
+    $validate = $request->validate([
+      'email' => 'required|email',
+      'password' => 'required'
+    ]);
+
     $credentials = $request->only('email', 'password');
     if (Auth::attempt($credentials)) {
       return redirect('/task')->with('success', 'You are logged in');
     }
-    return redirect('/')->with('error', 'Invalid email or password');
+    return redirect('/');
   }
 
   public function logout(Request $request)

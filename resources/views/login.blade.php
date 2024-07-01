@@ -16,11 +16,20 @@
             <h3 class="bg-gray-100 p-2 rounded-t w-full">Login</h3>
             <div class="flex flex-col p-2 w-full">
                 <label for="email" class="font-bold mb-2">Email: </label>
-                <input type="email" name="email" id="email" class="border rounded h-8" required>
+                <input type="email" name="email" id="email"
+                    class="border rounded h-8 @error('email') is-invalid @enderror">
+
+                @error('email')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
             </div>
             <div class="flex flex-col p-2 w-full">
                 <label for="password" class="font-bold mb-2">Password: </label>
-                <input type="password" name="password" id="password" class="border rounded h-8" required>
+                <input type="password" name="password" id="password"
+                    class="border rounded h-8 @error('password') is-invalid @enderror">
+                @error('password')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
             </div>
             <button class="border p-1 m-2 rounded mb-8"> Login</button>
         </form>
@@ -29,6 +38,7 @@
             Don't have an account?
             <a href={{ route('signup') }} class="text-orange-400"> Sign up</a>
         </p>
+
 </body>
 
 </html>

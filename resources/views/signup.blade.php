@@ -28,6 +28,7 @@
             </div>
             <button class="border p-1 m-2 rounded mb-8"> Sign up</button>
         </form>
+
 </body>
 
 </html>
