@@ -9,17 +9,23 @@ class TaskController extends Controller
 {
   public function index()
   {
-    $tasks = Task::all()->where('user_id', auth()->id()); //Eloquent ORM --> SELECT * FROM tasks
+    // $tasks = Task::all()->where('user_id', auth()->id()); //Eloquent ORM --> SELECT * FROM tasks
+    $tasks = Task::where('user_id', auth()->id())->get(); //Eloquent ORM --> SELECT * FROM tasks WHERE user_id = auth()->id()
     return view('index')->with('tasks', $tasks);
   }
   public function addTask(Request $request)
   {
+    $validate = $request->validate([
+      'title' => 'required',
+      'description' => 'required'
+    ]);
     try {
-      $task = new Task;
-      $task->title = $request->title;
-      $task->description = $request->description;
-      $task->user_id = auth()->user()->id;
-      $task->save(); //Eloquent ORM --> INSERT INTO tasks (title, description) VALUES ($request->title, $request->description)
+      // $task = new Task;
+      Task::create([
+        'title' => $request->title,
+        'description' => $request->description,
+        'user_id' => auth()->user()->id
+      ]); //Eloquent ORM --> INSERT INTO tasks (title, description) VALUES ($request->title, $request->description)
       return redirect('/task');
     } catch (\Exception $e) {
       return redirect('/task')->with('error', 'Error adding task');
@@ -42,6 +48,7 @@ class TaskController extends Controller
   }
   public function updateTask(Request $request)
   {
+
     try {
       $task = Task::find($request->id);
       $task->title = $request->title;

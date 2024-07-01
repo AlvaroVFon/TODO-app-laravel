@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class AuthController extends Controller
 {
@@ -22,13 +23,20 @@ class AuthController extends Controller
 
   public function register(Request $request)
   {
+    $validate = $request->validate([
+      'name' => 'required',
+      'email' => ['required', 'email', Rule::unique('users')],
+      'password' => 'required',
+
+    ]);
 
     try {
-      $user = new User;
-      $user->name = $request->name;
-      $user->email = $request->email;
-      $user->password = bcrypt($request->password);
-      $user->save();
+      // $user = new User(); --> Usar Eloquent ORM
+      $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => bcrypt($request->password)
+      ]);
       return redirect('/')->with('success', 'You are registered successfully.');
     } catch (\Exception $e) {
       return redirect('/')->with('error', 'This email is already registered.');
@@ -37,7 +45,7 @@ class AuthController extends Controller
   public function login(Request $request)
   {
     $validate = $request->validate([
-      'email' => 'required|email',
+      'email' => ['required', 'email'],
       'password' => 'required'
     ]);
 

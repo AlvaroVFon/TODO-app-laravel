@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\TestController;
+
 
 Route::group(
   ['middleware' => 'web'],
@@ -25,3 +27,5 @@ Route::group(
     Route::put('/update/{id}', [TaskController::class, 'updateTask'])->name('update');
   }
 );
+
+Route::get('/test', [TestController::class, 'index']);
