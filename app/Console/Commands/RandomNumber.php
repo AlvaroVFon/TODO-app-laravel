@@ -11,7 +11,7 @@ class RandomNumber extends Command
    *
    * @var string
    */
-  protected $signature = 'randomNumber';
+  protected $signature = 'randomNumber {limit=1000}';
 
   /**
    * The console command description.
@@ -25,7 +25,7 @@ class RandomNumber extends Command
    */
   public function handle()
   {
-    $randomNumber = rand(1, 1000);
+    $randomNumber = rand(1, $this->argument('limit'));
     $this->info("Random number: $randomNumber");
   }
 }
