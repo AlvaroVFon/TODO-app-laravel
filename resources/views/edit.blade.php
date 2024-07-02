@@ -9,10 +9,15 @@
     <title>Update task</title>
 </head>
 
-<body class="min-h-[100dvh] flex items-center">
-    <main class="w-full flex flex-col gap-3 items-center justify-center">
+<body class="min-h-[100dvh] flex flex-col justify-center items-center">
+    <header class="w-2/3 flex justify-between items-center">
+        <h1 class="text-xl">Welcome, <span class="text-blue-500">{{ $user->email }}</span></h1>
         <a href={{ url('logout') }}
-            class="absolute top-20 right-24 text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 duration-300">Logout</a>
+            class=" text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 duration-300">
+            Logout
+        </a>
+    </header>
+    <main class="w-full flex flex-col gap-3 items-center justify-center">
         <form method="POST" action={{ route('update', ['id' => $task->id]) }}
             class="flex flex-col gap-2 items-start border rounded w-2/3">
             @csrf

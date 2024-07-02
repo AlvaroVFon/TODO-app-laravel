@@ -14,15 +14,6 @@
         <form action="/login" method="POST" class="flex flex-col gap-2 items-start border rounded w-1/3">
             @csrf
             <h3 class="bg-blue-500 text-white text-lg font-bold p-2 rounded-t w-full">Login</h3>
-            @if ($errors->any())
-                <div class="w-full flex justify-center">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li class="bg-red-500 text-white p-2 ">{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
             <div class="flex flex-col p-2 w-full">
                 <label for="email" class="font-bold mb-2">Email: </label>
                 <input type="email" name="email" id="email"

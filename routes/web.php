@@ -29,3 +29,4 @@ Route::group(
 );
 
 Route::get('/test', [TestController::class, 'index']);
+Route::get('/alltasks', [TaskController::class, 'allTask']);
